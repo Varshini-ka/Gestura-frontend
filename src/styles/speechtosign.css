@@ -1,0 +1,99 @@
+/* Speech-to-Sign specific styles */
+.speech-to-sign-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Sign output display */
+.sign-output {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  perspective: 1000px;
+}
+
+/* Grid wrapper for sign media */
+.sign-images-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+/* Single image layout */
+.sign-images-single {
+  justify-content: center;
+}
+
+/* Few images (2–4) layout */
+.sign-images-few {
+  justify-content: center;
+}
+
+/* Individual sign image wrapper */
+.sign-image-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Sign media styling */
+.sign-output img {
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: var(--transition);
+  transform-style: preserve-3d;
+  margin: 5px;
+}
+
+.sign-output img[alt="sign-gif"],
+.sign-output img.gif-image {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+}
+
+.sign-output img.letter-image {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+
+/* Hover effect */
+.sign-output img:hover {
+  transform: translateY(-8px) rotateY(10deg);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* File name display under sign images */
+.sign-output .relative small {
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+  color: var(--text-light);
+  text-align: center;
+}
+
+/* Dark mode specific styles */
+@media (prefers-color-scheme: dark) {
+  .sign-output img {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .sign-output img[alt="sign-gif"],
+  .sign-output img.gif-image {
+    width: 150px;
+    height: 150px;
+  }
+
+  .sign-output img.letter-image {
+    width: 90px;
+    height: 90px;
+  }
+}

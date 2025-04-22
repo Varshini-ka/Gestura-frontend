@@ -1,0 +1,155 @@
+/* Text-to-Sign specific styles */
+.text-to-sign-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.text-to-sign-input {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.text-to-sign-input input {
+  flex-grow: 1;
+  border-radius: 0.375rem;
+  padding: 12px 15px;
+  border: 1px solid #dfe6e9;
+  font-family: "Poppins", sans-serif;
+}
+
+.text-to-sign-input button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 600;
+  margin: 0; /* Override default button margin */
+}
+
+.text-to-sign-input button:hover {
+  background: var(--bs-primary-dark, #8b2ceb);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Sign output display */
+.sign-output {
+  margin-top: 30px;
+  perspective: 1000px;
+}
+
+.sign-images-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 images per row by default */
+  gap: 15px;
+  justify-items: center;
+}
+
+/* Special layout for when there's only one image */
+.sign-images-single {
+  grid-template-columns: 1fr !important; /* Force single column */
+  justify-items: center !important;
+}
+
+/* Special layout for when there are fewer than 5 images */
+.sign-images-few {
+  margin: 0 auto;
+  width: fit-content;
+  grid-template-columns: repeat(auto-fit, minmax(160px, max-content)) !important;
+  justify-content: center !important;
+}
+
+.sign-image-item {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.sign-output img {
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.sign-output .gif-image {
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+}
+
+.sign-output .letter-image {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.sign-output img:hover {
+  transform: translateY(-8px) rotateY(10deg);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Dark mode specific styles */
+@media (prefers-color-scheme: dark) {
+  .text-to-sign-input input {
+    background-color: var(--bs-dark);
+    border-color: var(--bs-dark);
+    color: var(--bs-light);
+  }
+  
+  .sign-output img {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .sign-images-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 images per row on medium screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .sign-images-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 images per row on smaller screens */
+  }
+}
+
+@media (max-width: 600px) {
+  .text-to-sign-input {
+    flex-direction: column;
+  }
+  
+  .text-to-sign-input button {
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .sign-output .gif-image {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .sign-output .letter-image {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .sign-images-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 images per row on very small screens */
+    gap: 10px;
+  }
+}
+
+@media (max-width: 400px) {
+  .sign-images-grid {
+    grid-template-columns: 1fr; /* 1 image per row on extremely small screens */
+  }
+}
