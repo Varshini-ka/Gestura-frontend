@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import axios from "axios"; // Using axios for HTTP requests
-import "../styles/login.css"; // Updated styles for Login component
+import axios from "axios";
+import "../styles/login.css";
 
 function Login() {
   const navigate = useNavigate();
@@ -12,14 +12,13 @@ function Login() {
   useEffect(() => {
     const currentUser = localStorage.getItem("currentUser");
     if (currentUser) {
-      navigate("/dashboard"); // Redirect if already logged in
+      navigate("/dashboard");
     }
   }, [navigate]);
 
   const handleLogin = async () => {
-    // Form validation
     if (!username || !password) {
-      setError("Please enter valid credentials");
+      setError("Please enter both username and password");
       return;
     }
 
@@ -30,15 +29,15 @@ function Login() {
       });
 
       if (response.data.token) {
-        // Store JWT token and user data in localStorage
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("currentUser", JSON.stringify(response.data.user));
-
-        navigate("/dashboard"); // Navigate to dashboard after login
+        navigate("/dashboard");
+      } else {
+        setError("Login failed. Please try again.");
       }
     } catch (err) {
       console.error("Login error:", err);
-      setError("Invalid username or password");
+      setError(err.response?.data?.error || "Invalid username or password");
     }
   };
 
@@ -59,6 +58,9 @@ function Login() {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button onClick={handleLogin}>Login</button>
+      <p className="signup-link">
+        Don't have an account? <a href="/signup">Sign Up</a>
+      </p>
     </div>
   );
 }
