@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import axios from "axios"; // Using axios for HTTP requests
-import "../styles/signup.css"; // Updated styles for Signup component
+import axios from "axios";
+import "../styles/signup.css";
 
 function Signup() {
   const navigate = useNavigate();
@@ -12,7 +12,6 @@ function Signup() {
   const [error, setError] = useState("");
 
   const handleSignup = async () => {
-    // Form validation
     if (!name || !email || !password || !confirmPassword) {
       setError("All fields are required!");
       return;
@@ -21,8 +20,6 @@ function Signup() {
       setError("Passwords do not match!");
       return;
     }
-
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       setError("Please enter a valid email address");
@@ -37,12 +34,14 @@ function Signup() {
       });
 
       if (response.status === 201) {
-        alert("Signup Successful! Redirecting...");
-        navigate("/login"); // Redirect to login page
+        alert("Signup Successful! Redirecting to login...");
+        navigate("/login");
+      } else {
+        setError("Signup failed. Please try again.");
       }
     } catch (err) {
       console.error("Signup error:", err);
-      setError("Error creating account. Please try again.");
+      setError(err.response?.data?.error || "Error creating account. Please try again.");
     }
   };
 
